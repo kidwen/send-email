@@ -4,7 +4,6 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.utils import formataddr
-import time
 import logging
 # 第三方 SMTP 服务
 
@@ -34,20 +33,19 @@ def mail(u,datas):
         return ret
 def get_html(data_list):
     header = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>'
-    th = "<body text='#000000'><center><font size=5 color='#dd0000'><b>" + "今日更新岗位数:" + str(len(data_list)) + "</b></font></center>" \
-     "<br/><table style=' font-size: 14px;' border='1' cellspacing='0' cellpadding='1' bordercolor='#000000' width='20%' align='center' ></table>" \
-     "<br/><table bgcolor='#B0E0E6' style=' font-size: 14px;'border='1' cellspacing='0' cellpadding='0' bordercolor='#000000' width='95%' align='center' >" \
-      "<tr  bgcolor='#F79646' align='left' >" \
-      "<th>日期</th>" \
-      "<th>岗位</th>" \
-      "<th>地方</th>" \
+    th = "<body style='background-color: #141414;color: #ddd;'><center><font size=5 color='#ddd'><b>" + "今日更新岗位数:" + str(len(data_list)) + "</b></font></center>" \
+     "<br/><table style='font-size: 16px;' border='1' cellspacing='0' cellpadding='0' bordercolor='#303030' width='95%' align='center' >" \
+      "<tr  bgcolor='#1d1d1d' align='left' >" \
+      "<th style='padding: 10px;'>日期</th>" \
+      "<th style='padding: 10px;'>岗位</th>" \
+      "<th style='padding: 10px;'>地方</th>" \
         "</tr>"
     tr = ""
     for row in data_list:
         td = ''
-        td = td + "<td>" + str(row["update_date"]) + "</td>"
-        td = td + "<td><a href='" +str(row["job_url"])+"'>"+ str(row["job_name"]) + "</ a></td>"
-        td = td + "<td>" + str(row.get("city")) + "</td>"
+        td = td + "<td style='padding: 10px;'>" + str(row["update_date"]) + "</td>"
+        td = td + "<td style='padding: 10px;'><a  style='text-decoration: none;color: #177ddc;' href='" +str(row["job_url"])+"'>"+ str(row["job_name"]) + "</ a></td>"
+        td = td + "<td style='padding: 10px;'>" + str(row.get("city")) + "</td>"
         tr = tr + "<tr>" + td + "</tr>"
     body = str(tr)
     tail = '</table></body></html>'
